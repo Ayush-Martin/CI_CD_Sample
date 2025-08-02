@@ -43,7 +43,9 @@ jobs:
 
       - name: Set deploy env and deploy
         env:
-          EC2_HOST: ${{ secrets.EC2_HOST }}
-          EC2_USER: ${{ secrets.EC2_USER }}
-          ENV_FILE: ${{ secrets.ENV_FILE }}
+            EC2_HOST: ${{ secrets.EC2_HOST }}
+            EC2_USER: ${{ secrets.EC2_USER }}
+            PORT: ${{ secrets.PORT }}
+            REDIS_URL: ${{ secrets.REDIS_URL }}
+            APP_NAME: ${{ secrets.APP_NAME }}
         run: bash deploy.sh
