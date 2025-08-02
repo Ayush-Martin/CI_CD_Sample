@@ -10,5 +10,5 @@ EOF
 
   docker pull ayushmartin/ci_cd_sample:latest
   docker stop ci_cd_sample || true && docker rm ci_cd_sample || true
-  docker-compose -f docker-compose.yml up -d
+  docker-compose -f docker-compose.yaml up -d
 ENDSSH

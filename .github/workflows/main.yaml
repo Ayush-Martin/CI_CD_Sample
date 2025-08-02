@@ -35,6 +35,16 @@ jobs:
       - name: Push Docker image
         run: docker push $IMAGE_NAME
 
+      - name: Copy docker-compose file to EC2
+        uses: appleboy/scp-action@v0.1.4
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          source: "docker-compose.yaml"
+          target: "~/ci-cd-app"
+          strip_components: 0
+
       - name: Set up SSH key
         run: |
           mkdir -p ~/.ssh
@@ -43,9 +53,9 @@ jobs:
 
       - name: Set deploy env and deploy
         env:
-            EC2_HOST: ${{ secrets.EC2_HOST }}
-            EC2_USER: ${{ secrets.EC2_USER }}
-            PORT: ${{ secrets.PORT }}
-            REDIS_URL: ${{ secrets.REDIS_URL }}
-            APP_NAME: ${{ secrets.APP_NAME }}
+          EC2_HOST: ${{ secrets.EC2_HOST }}
+          EC2_USER: ${{ secrets.EC2_USER }}
+          PORT: ${{ secrets.PORT }}
+          REDIS_URL: ${{ secrets.REDIS_URL }}
+          APP_NAME: ${{ secrets.APP_NAME }}
         run: bash deploy.sh
