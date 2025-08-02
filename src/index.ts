@@ -19,7 +19,7 @@ redisClient.connect();
 // Routes
 
 app.get("/", (req, res) => {
-  res.send("Hello World");
+  res.send("Hello World dfd");
 });
 
 app.post("/add-name", async (req, res) => {
