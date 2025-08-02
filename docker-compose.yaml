@@ -2,7 +2,7 @@ version: "3"
 
 services:
   app:
-    build: .
+    image: ayushmartin/ci_cd_sample:latest
     container_name: CI_CD_SAMPLE_APP
     ports:
       - "3000:3000"
