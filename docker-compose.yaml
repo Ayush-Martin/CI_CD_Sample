@@ -1,0 +1,26 @@
+version: "3"
+
+services:
+  app:
+    build: .
+    container_name: CI_CD_SAMPLE_APP
+    ports:
+      - "3000:3000"
+    environment:
+      - PORT=3000
+      - APP_NAME=CI_CD_SAMPLE
+      - REDIS_URL=redis://redis:6379
+    depends_on:
+      - redis
+
+  redis:
+    image: redis
+    container_name: CI_CD_SAMPLE_REDIS
+    volumes:
+      - redis-data:/data
+    ports:
+      - "6379:6379"
+
+volumes:
+  redis-data:
+    driver: local
